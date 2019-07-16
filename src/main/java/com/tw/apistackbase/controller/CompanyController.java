@@ -10,7 +10,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/companies")
 public class CompanyController {
-
+    private List<Company> companies = Company.createTestCompany();
     @GetMapping
     public List<Company> getAllCompanies(){
         return Company.createTestCompany();
@@ -18,20 +18,22 @@ public class CompanyController {
 
     @GetMapping("/{index}")
     public Company getCompanyByIndex(@PathVariable int index){
-        List<Company> companies = Company.createTestCompany();
         return companies.get(index-1);
     }
 
     @GetMapping("/{companyIndex}/employees")
     public List<Employee> getEmployeesByCompanyIndex(@PathVariable int companyIndex){
-        List<Company> companies = Company.createTestCompany();
         return companies.get(companyIndex-1).getEmployees();
     }
 
     @GetMapping("/s")
     public List<Company> getCompaniesWithPageAndPageSize(@RequestParam int page, @RequestParam int pageSize){
-        List<Company> companies = Company.createTestCompany();
         return companies.subList((page - 1) * pageSize,page * pageSize);
     }
 
+    @PostMapping
+    public List<Company> addCompany(@RequestBody Company company){
+        companies.add(company);
+        return companies;
+    }
 }
