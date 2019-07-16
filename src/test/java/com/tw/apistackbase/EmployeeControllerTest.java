@@ -10,6 +10,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultMatcher;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -108,4 +109,49 @@ public class EmployeeControllerTest {
                         "]"));
     }
 
+    @Test
+    public void should_return_employees_when_call_add_employees_equals_gender_givn_employee() throws Exception {
+        mockMvc.perform(post("/employees")
+                .contentType("application/json;charset=UTF-8")
+                .content("{\n" +
+                        "\t\"id\": 5,\n" +
+                        "\t\"name\": \"five\",\n" +
+                        "\t\"age\": 20,\n" +
+                        "\t\"gender\": \"male\",\n" +
+                        "\t\"salary\": 5500\n" +
+                        "}"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("application/json;charset=UTF-8"))
+                .andExpect(content().json("[\n" +
+                        "    {\n" +
+                        "        \"id\": 1,\n" +
+                        "        \"name\": \"one\",\n" +
+                        "        \"age\": 20,\n" +
+                        "        \"gender\": \"male\",\n" +
+                        "        \"salary\": 5000\n" +
+                        "    },\n" +
+                        "    {\n" +
+                        "        \"id\": 2,\n" +
+                        "        \"name\": \"two\",\n" +
+                        "        \"age\": 20,\n" +
+                        "        \"gender\": \"female\",\n" +
+                        "        \"salary\": 5200\n" +
+                        "    },\n" +
+                        "    {\n" +
+                        "        \"id\": 3,\n" +
+                        "        \"name\": \"three\",\n" +
+                        "        \"age\": 20,\n" +
+                        "        \"gender\": \"female\",\n" +
+                        "        \"salary\": 5300\n" +
+                        "    },\n" +
+                        "    {\n" +
+                        "        \"id\": 5,\n" +
+                        "        \"name\": \"five\",\n" +
+                        "        \"age\": 20,\n" +
+                        "        \"gender\": \"male\",\n" +
+                        "        \"salary\": 5500\n" +
+                        "    }\n" +
+                        "]"));
+    }
 }

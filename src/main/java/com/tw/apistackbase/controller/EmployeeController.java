@@ -26,6 +26,12 @@ public class EmployeeController {
     public Employee getEmployeeById(@PathVariable int employeeId){
         return employees.stream().filter(employee -> employee.getId() == employeeId).collect(Collectors.toList()).get(0);
     }
+    @PostMapping
+    public List<Employee> addEmployee(@RequestBody Employee employee){
+        employees.add(employee);
+        return employees;
+    }
+
     public List<Employee> getEmployeesWithLimitPageAndPageSize(int page, int pageSize){
         return employees.subList((page - 1) * pageSize, page * pageSize );
     }
@@ -33,4 +39,6 @@ public class EmployeeController {
     public List<Employee> getEmployeesByEqualsGender(@RequestParam String gender) {
         return employees.stream().filter(employee -> employee.getGender().equals(gender)).collect(Collectors.toList());
     }
+
+
 }
