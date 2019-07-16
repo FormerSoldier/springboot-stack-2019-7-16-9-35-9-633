@@ -104,4 +104,39 @@ public class CompanyComtrollerTest {
                         "    }\n" +
                         "]"));
     }
+
+    @Test
+    public void should_return_company_when_call_get_company_by_index_given_index() throws Exception {
+        mockMvc.perform(get("/companies/1"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("application/json;charset=UTF-8"))
+                .andExpect(content().json("{\n" +
+                        "    \"companyName\": \"oocl\",\n" +
+                        "    \"employeesNumber\": 10000,\n" +
+                        "    \"employees\": [\n" +
+                        "        {\n" +
+                        "            \"id\": 0,\n" +
+                        "            \"name\": \"XiaoHong\",\n" +
+                        "            \"age\": 10,\n" +
+                        "            \"gender\": \"female\",\n" +
+                        "            \"salary\": 10\n" +
+                        "        },\n" +
+                        "        {\n" +
+                        "            \"id\": 1,\n" +
+                        "            \"name\": \"XiaoGao\",\n" +
+                        "            \"age\": 12,\n" +
+                        "            \"gender\": \"male\",\n" +
+                        "            \"salary\": 100\n" +
+                        "        },\n" +
+                        "        {\n" +
+                        "            \"id\": 2,\n" +
+                        "            \"name\": \"XiaoLiu\",\n" +
+                        "            \"age\": 14,\n" +
+                        "            \"gender\": \"male\",\n" +
+                        "            \"salary\": 1000\n" +
+                        "        }\n" +
+                        "    ]\n" +
+                        "}"));
+    }
 }
