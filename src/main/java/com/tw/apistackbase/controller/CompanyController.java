@@ -48,4 +48,10 @@ public class CompanyController {
         companies.set(realIndex, company);
         return companies;
     }
+
+    @DeleteMapping("/{companyIndex}")
+    public List<Company> deleteCompanyByIndex(@PathVariable int companyIndex){
+        companies.remove(companyIndex-1);
+        return companies;
+    }
 }

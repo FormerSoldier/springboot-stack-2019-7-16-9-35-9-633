@@ -8,9 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -368,6 +366,64 @@ public class CompanyComtrollerTest {
                         "        \"companyName\": \"TW\",\n" +
                         "        \"employeesNumber\": 0,\n" +
                         "        \"employees\": null\n" +
+                        "    }\n" +
+                        "]"));
+    }
+
+
+    @Test
+    public void should_return_companies_when_call_delete_companies_given_conpany_indes() throws Exception {
+        mockMvc.perform(delete("/companies/2"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("application/json;charset=UTF-8"))
+                .andExpect(content().json("[\n" +
+                        "    {\n" +
+                        "        \"companyName\": \"oocl\",\n" +
+                        "        \"employeesNumber\": 10000,\n" +
+                        "        \"employees\": [\n" +
+                        "            {\n" +
+                        "                \"id\": 0,\n" +
+                        "                \"name\": \"XiaoHong\",\n" +
+                        "                \"age\": 10,\n" +
+                        "                \"gender\": \"female\",\n" +
+                        "                \"salary\": 10\n" +
+                        "            },\n" +
+                        "            {\n" +
+                        "                \"id\": 1,\n" +
+                        "                \"name\": \"XiaoGao\",\n" +
+                        "                \"age\": 12,\n" +
+                        "                \"gender\": \"male\",\n" +
+                        "                \"salary\": 100\n" +
+                        "            },\n" +
+                        "            {\n" +
+                        "                \"id\": 2,\n" +
+                        "                \"name\": \"XiaoLiu\",\n" +
+                        "                \"age\": 14,\n" +
+                        "                \"gender\": \"male\",\n" +
+                        "                \"salary\": 1000\n" +
+                        "            }\n" +
+                        "        ]\n" +
+                        "    },\n" +
+                        "    {\n" +
+                        "        \"companyName\": \"TW\",\n" +
+                        "        \"employeesNumber\": 600,\n" +
+                        "        \"employees\": [\n" +
+                        "            {\n" +
+                        "                \"id\": 4,\n" +
+                        "                \"name\": \"huage\",\n" +
+                        "                \"age\": 30,\n" +
+                        "                \"gender\": \"male\",\n" +
+                        "                \"salary\": 1002\n" +
+                        "            },\n" +
+                        "            {\n" +
+                        "                \"id\": 4,\n" +
+                        "                \"name\": \"niuxin\",\n" +
+                        "                \"age\": 25,\n" +
+                        "                \"gender\": \"male\",\n" +
+                        "                \"salary\": 1003\n" +
+                        "            }\n" +
+                        "        ]\n" +
                         "    }\n" +
                         "]"));
     }
