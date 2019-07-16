@@ -139,4 +139,35 @@ public class CompanyComtrollerTest {
                         "    ]\n" +
                         "}"));
     }
+
+    @Test
+    public void should_return_employees_when_call_get_employees_by_company_index_given_company_index() throws Exception {
+        mockMvc.perform(get("/companies/1/employees"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("application/json;charset=UTF-8"))
+                .andExpect(content().json("[\n" +
+                        "    {\n" +
+                        "        \"id\": 0,\n" +
+                        "        \"name\": \"XiaoHong\",\n" +
+                        "        \"age\": 10,\n" +
+                        "        \"gender\": \"female\",\n" +
+                        "        \"salary\": 10\n" +
+                        "    },\n" +
+                        "    {\n" +
+                        "        \"id\": 1,\n" +
+                        "        \"name\": \"XiaoGao\",\n" +
+                        "        \"age\": 12,\n" +
+                        "        \"gender\": \"male\",\n" +
+                        "        \"salary\": 100\n" +
+                        "    },\n" +
+                        "    {\n" +
+                        "        \"id\": 2,\n" +
+                        "        \"name\": \"XiaoLiu\",\n" +
+                        "        \"age\": 14,\n" +
+                        "        \"gender\": \"male\",\n" +
+                        "        \"salary\": 1000\n" +
+                        "    }\n" +
+                        "]"));
+    }
 }
