@@ -16,7 +16,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @AutoConfigureMockMvc
 @SpringBootTest
-public class CompanyComtrollerTest {
+public class CompanyControllerTest {
 
     @Autowired
     MockMvc mockMvc;
@@ -173,7 +173,7 @@ public class CompanyComtrollerTest {
 
     @Test
     public void should_return_company_when_call_get_companies_with_page_and_page_size_given_page_page_size() throws Exception {
-        mockMvc.perform(get("/companies/s?page=3&pageSize=1"))
+        mockMvc.perform(get("/companies?page=3&pageSize=1"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("application/json;charset=UTF-8"))
