@@ -28,4 +28,10 @@ public class CompanyController {
         return companies.get(companyIndex-1).getEmployees();
     }
 
+    @GetMapping("/s")
+    public List<Company> getCompaniesWithPageAndPageSize(@RequestParam int page, @RequestParam int pageSize){
+        List<Company> companies = Company.createTestCompany();
+        return companies.subList((page - 1) * pageSize,page * pageSize);
+    }
+
 }

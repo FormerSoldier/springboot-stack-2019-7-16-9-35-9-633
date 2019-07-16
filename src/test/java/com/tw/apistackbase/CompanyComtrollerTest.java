@@ -170,4 +170,35 @@ public class CompanyComtrollerTest {
                         "    }\n" +
                         "]"));
     }
+
+    @Test
+    public void should_return_company_when_call_get_companies_with_page_and_page_size_given_page_page_size() throws Exception {
+        mockMvc.perform(get("/companies/s?page=3&pageSize=1"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("application/json;charset=UTF-8"))
+                .andExpect(content().json("[\n" +
+                        "    {\n" +
+                        "        \"companyName\": \"TW\",\n" +
+                        "        \"employeesNumber\": 600,\n" +
+                        "        \"employees\": [\n" +
+                        "            {\n" +
+                        "                \"id\": 4,\n" +
+                        "                \"name\": \"huage\",\n" +
+                        "                \"age\": 30,\n" +
+                        "                \"gender\": \"male\",\n" +
+                        "                \"salary\": 1002\n" +
+                        "            },\n" +
+                        "            {\n" +
+                        "                \"id\": 4,\n" +
+                        "                \"name\": \"niuxin\",\n" +
+                        "                \"age\": 25,\n" +
+                        "                \"gender\": \"male\",\n" +
+                        "                \"salary\": 1003\n" +
+                        "            }\n" +
+                        "        ]\n" +
+                        "    }\n" +
+                        "]"));
+    }
+
 }
