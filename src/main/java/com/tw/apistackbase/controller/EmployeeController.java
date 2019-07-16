@@ -32,16 +32,17 @@ public class EmployeeController {
         return employees;
     }
 
-    @PutMapping
-    public List<Employee> updateEmployee(@RequestBody Employee employee){
-        int index = -1;
-        for(int i = 0; i < employees.size(); i++)
-            if(employees.get(i).getId() == employee.getId())
-                index = i;
-        employees.set(index,employee);
+    @PutMapping("/{index}")
+    public List<Employee> updateEmployee(@PathVariable int index, @RequestBody Employee employee){
+        employees.set(index-1,employee);
         return employees;
     }
 
+    @DeleteMapping("{index}")
+    public List<Employee> deleteEmployeeByIndex(@PathVariable int index){
+        employees.remove(index-1);
+        return employees;
+    }
     public List<Employee> getEmployeesWithLimitPageAndPageSize(int page, int pageSize){
         return employees.subList((page - 1) * pageSize, page * pageSize );
     }

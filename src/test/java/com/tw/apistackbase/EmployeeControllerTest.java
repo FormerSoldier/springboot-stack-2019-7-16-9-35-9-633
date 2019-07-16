@@ -9,9 +9,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultMatcher;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -158,7 +156,7 @@ public class EmployeeControllerTest {
 
     @Test
     public void should_return_employees_when_call_update_employee_givn_employee() throws Exception {
-        mockMvc.perform(put("/employees")
+        mockMvc.perform(put("/employees/1")
                 .contentType("application/json;charset=UTF-8")
                 .content("{\n" +
                         "\t\"id\": 1,\n" +
@@ -178,6 +176,30 @@ public class EmployeeControllerTest {
                         "        \"gender\": \"male\",\n" +
                         "        \"salary\": 5500\n" +
                         "    },\n" +
+                        "    {\n" +
+                        "        \"id\": 2,\n" +
+                        "        \"name\": \"two\",\n" +
+                        "        \"age\": 20,\n" +
+                        "        \"gender\": \"female\",\n" +
+                        "        \"salary\": 5200\n" +
+                        "    },\n" +
+                        "    {\n" +
+                        "        \"id\": 3,\n" +
+                        "        \"name\": \"three\",\n" +
+                        "        \"age\": 20,\n" +
+                        "        \"gender\": \"female\",\n" +
+                        "        \"salary\": 5300\n" +
+                        "    }\n" +
+                        "]"));
+    }
+
+    @Test
+    public void should_return_employees_when_call_delete_employee_by_index_givn_index() throws Exception {
+        mockMvc.perform(delete("/employees/1"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("application/json;charset=UTF-8"))
+                .andExpect(content().json("[\n" +
                         "    {\n" +
                         "        \"id\": 2,\n" +
                         "        \"name\": \"two\",\n" +
