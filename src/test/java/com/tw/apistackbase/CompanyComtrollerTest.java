@@ -10,6 +10,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -290,6 +291,81 @@ public class CompanyComtrollerTest {
                         "    },\n" +
                         "    {\n" +
                         "        \"companyName\": \"new company\",\n" +
+                        "        \"employeesNumber\": 0,\n" +
+                        "        \"employees\": null\n" +
+                        "    }\n" +
+                        "]"));
+    }
+
+
+    @Test
+    public void should_return_companies_when_call_update_companies_given_company() throws Exception {
+        mockMvc.perform(put("/companies/3")
+                .contentType("application/json;charset=UTF-8")
+                .content("{\n" +
+                        "\t\"companyName\": \"TW\",\n" +
+                        "\t\"employeesNumber\": 0\n" +
+                        "}"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("application/json;charset=UTF-8"))
+                .andExpect(content().json("[\n" +
+                        "    {\n" +
+                        "        \"companyName\": \"oocl\",\n" +
+                        "        \"employeesNumber\": 10000,\n" +
+                        "        \"employees\": [\n" +
+                        "            {\n" +
+                        "                \"id\": 0,\n" +
+                        "                \"name\": \"XiaoHong\",\n" +
+                        "                \"age\": 10,\n" +
+                        "                \"gender\": \"female\",\n" +
+                        "                \"salary\": 10\n" +
+                        "            },\n" +
+                        "            {\n" +
+                        "                \"id\": 1,\n" +
+                        "                \"name\": \"XiaoGao\",\n" +
+                        "                \"age\": 12,\n" +
+                        "                \"gender\": \"male\",\n" +
+                        "                \"salary\": 100\n" +
+                        "            },\n" +
+                        "            {\n" +
+                        "                \"id\": 2,\n" +
+                        "                \"name\": \"XiaoLiu\",\n" +
+                        "                \"age\": 14,\n" +
+                        "                \"gender\": \"male\",\n" +
+                        "                \"salary\": 1000\n" +
+                        "            }\n" +
+                        "        ]\n" +
+                        "    },\n" +
+                        "    {\n" +
+                        "        \"companyName\": \"alibaba\",\n" +
+                        "        \"employeesNumber\": 200,\n" +
+                        "        \"employees\": [\n" +
+                        "            {\n" +
+                        "                \"id\": 4,\n" +
+                        "                \"name\": \"alibaba1\",\n" +
+                        "                \"age\": 20,\n" +
+                        "                \"gender\": \"female\",\n" +
+                        "                \"salary\": 10\n" +
+                        "            },\n" +
+                        "            {\n" +
+                        "                \"id\": 11,\n" +
+                        "                \"name\": \"tengxun2\",\n" +
+                        "                \"age\": 19,\n" +
+                        "                \"gender\": \"female\",\n" +
+                        "                \"salary\": 7000\n" +
+                        "            },\n" +
+                        "            {\n" +
+                        "                \"id\": 6,\n" +
+                        "                \"name\": \"alibaba3\",\n" +
+                        "                \"age\": 19,\n" +
+                        "                \"gender\": \"male\",\n" +
+                        "                \"salary\": 8000\n" +
+                        "            }\n" +
+                        "        ]\n" +
+                        "    },\n" +
+                        "    {\n" +
+                        "        \"companyName\": \"TW\",\n" +
                         "        \"employeesNumber\": 0,\n" +
                         "        \"employees\": null\n" +
                         "    }\n" +

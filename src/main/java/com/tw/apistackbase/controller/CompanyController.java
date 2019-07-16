@@ -5,6 +5,7 @@ import com.tw.apistackbase.model.Employee;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.ListIterator;
 
 
 @RestController
@@ -34,6 +35,17 @@ public class CompanyController {
     @PostMapping
     public List<Company> addCompany(@RequestBody Company company){
         companies.add(company);
+        return companies;
+    }
+
+    @PutMapping("/{companyId}")
+    public List<Company> updateCompany(@RequestBody Company company){
+        int realIndex = 0;
+        for(int i = 0; i < companies.size(); i++){
+            if(companies.get(i).getCompanyName().equals(company.getCompanyName()))
+                realIndex = i;
+        }
+        companies.set(realIndex, company);
         return companies;
     }
 }
