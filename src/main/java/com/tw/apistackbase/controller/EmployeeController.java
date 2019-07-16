@@ -32,6 +32,16 @@ public class EmployeeController {
         return employees;
     }
 
+    @PutMapping
+    public List<Employee> updateEmployee(@RequestBody Employee employee){
+        int index = -1;
+        for(int i = 0; i < employees.size(); i++)
+            if(employees.get(i).getId() == employee.getId())
+                index = i;
+        employees.set(index,employee);
+        return employees;
+    }
+
     public List<Employee> getEmployeesWithLimitPageAndPageSize(int page, int pageSize){
         return employees.subList((page - 1) * pageSize, page * pageSize );
     }
